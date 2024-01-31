@@ -1,12 +1,9 @@
 @extends('layout.master')
 @section('main_content')
     <div class="container-fluid mt-2">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Friends</li>
-            </ol>
-        </nav>
+        @section('breadcrumb')
+          <li class="breadcrumb-item active" aria-current="page">Friends</li>
+        @endsection
         @if(session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -54,7 +51,7 @@
                     @csrf
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Amount:</label>
-                      <input type="text" class="form-control" id="recipient-name" name="amount">
+                      <input type="text" class="form-control" id="recipient-name" name="amount" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

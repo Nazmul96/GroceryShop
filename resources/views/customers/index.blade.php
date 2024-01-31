@@ -1,13 +1,9 @@
 @extends('layout.master')
 @section('main_content')
-    <div class="container-fluid mt-2">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Customers</li>
-            </ol>
-        </nav>
-
+    <div class="container-fluid">
+        @section('breadcrumb')
+         <li class="breadcrumb-item active" aria-current="page">Customers</li>
+        @endsection
         <h2>Customer List</h2>
 
         <table class="table table-bordered table-striped">

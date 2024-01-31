@@ -38,6 +38,21 @@
 
         <!-- Main content -->
         <section class="content">
+            <nav aria-label="breadcrumb mt-2">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    @yield('breadcrumb')
+                </ol>
+            </nav>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
            @yield('main_content')
         </section>
         <!-- /.content -->

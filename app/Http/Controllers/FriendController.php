@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Constants\Transaction as TransactionConstant;
+use App\Http\Requests\FriendRequest;
 use App\Models\Friend;
 use App\Models\Transaction;
 use Illuminate\Contracts\View\View;
@@ -20,10 +21,10 @@ class FriendController extends Controller
         return view('friends.index',compact('friends'));
     }
 
-    function lendMoneyToFriend(Request $request, Friend $friend) : RedirectResponse
+    function lendMoneyToFriend(FriendRequest $request, Friend $friend) : RedirectResponse
     {
-        $amount = $request->input('amount');
-    
+        $amount = $request->validated('amount');
+
         $transaction = new Transaction([
             'type'   => TransactionConstant::TYPE_EXPENSE,
             'amount' => $amount,
@@ -35,7 +36,7 @@ class FriendController extends Controller
         return redirect()->route('friends')->with('success', 'Money lent successfully done.');
     }
 
-    public function receiveRepaymentFromFriend(Request $request, Friend $friend)
+    public function receiveRepaymentFromFriend(FriendRequest $request, Friend $friend)
     {
         $amount = $request->input('amount');
         
