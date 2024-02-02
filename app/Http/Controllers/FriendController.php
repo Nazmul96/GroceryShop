@@ -26,10 +26,11 @@ class FriendController extends Controller
         $amount = $request->validated('amount');
 
         $transaction = new Transaction([
-            'type'   => TransactionConstant::TYPE_EXPENSE,
+            'type'   => TransactionConstant::TYPE_LOAN,
+            'transaction_date'    => now()->format('Y-m-d'),
+            'transaction_details' => $request->validated('transaction_details'),
             'amount' => $amount,
         ]);
-
         $friend->transactions()->save($transaction);
         $friend->increment('total_loan', $amount);
         
@@ -41,7 +42,7 @@ class FriendController extends Controller
         $amount = $request->input('amount');
         
         $transaction = new Transaction([
-            'type' => TransactionConstant::TYPE_INCOME,
+            'type' => TransactionConstant::TYPE_REPAID,
             'amount' => $amount,
         ]);
 
@@ -51,11 +52,5 @@ class FriendController extends Controller
         return redirect()->route('friends')->with('success', 'Repayment received successfully.');
     }
 
-    public function showTransactions(Friend $friend): JsonResponse
-    {
-        $transactions = $friend->transactions;
-
-        return response()->json(['friend' => $friend, 'transactions' => $transactions]);
-    }
-
+ 
 }

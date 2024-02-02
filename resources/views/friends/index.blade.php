@@ -4,11 +4,7 @@
         @section('breadcrumb')
           <li class="breadcrumb-item active" aria-current="page">Friends</li>
         @endsection
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+       
         <h2>Friend List</h2>
 
         <table class="table table-bordered table-striped">
@@ -52,6 +48,10 @@
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Amount:</label>
                       <input type="text" class="form-control" id="recipient-name" name="amount" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="transaction-details" class="col-form-label">Transaction Details:</label>
+                      <textarea class="form-control" name="transaction_details" id="transaction-details" cols="30" rows="10"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -115,7 +115,7 @@
         function friendTransaction(friendId) {
 
                 $.ajax({
-                    url: '/friends/' + friendId + '/transactions',
+                    url: '/friend/' + friendId + '/transactions/details',
                     type: 'GET',
                     dataType: 'json',
                     success: function(response) {

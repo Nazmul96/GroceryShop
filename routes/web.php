@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +27,11 @@ Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers'
 Route::get('/friends', [FriendController::class, 'index'])->name('friends');
 Route::post('/friends/{friend}/lend-money', [FriendController::class, 'lendMoneyToFriend'])->name('lend_money');
 Route::post('/friends/{friend}/receive-repayment', [FriendController::class, 'receiveRepaymentFromFriend'])->name('receive_repayment');
-Route::get('/friends/{friend}/transactions', [FriendController::class, 'showTransactions']);
+
+Route::get('/friend/{friend}/transactions/details', [TransactionController::class, 'showFriendTransactions']);
+Route::post('/sell-transaction', [TransactionController::class, 'sellTransaction'])->name('sell.transaction');
+Route::get('/customer/{customer}/transactions/details', [TransactionController::class, 'showCustomerTransactions']);
+Route::post('/supplier-transaction', [TransactionController::class, 'supplierTransaction'])->name('supplier.transaction');
+Route::get('/supplier/{supplier}/transactions/details', [TransactionController::class, 'showSupplierTransactions']);
+
+Route::get('/report', [ReportController::class, 'reportGenerate'])->name('report');

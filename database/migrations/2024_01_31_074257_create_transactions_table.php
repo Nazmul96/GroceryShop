@@ -17,8 +17,10 @@ return new class extends Migration
   
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', [Transaction::TYPE_INCOME, Transaction::TYPE_EXPENSE])->notNull();
+            $table->enum('type', [Transaction::TYPE_INCOME, Transaction::TYPE_EXPENSE,Transaction::TYPE_LOAN, Transaction::TYPE_REPAID])->notNull();
             $table->decimal('amount', 10, 2)->notNull();
+            $table->text('transaction_details')->notNull();
+            $table->text('transaction_date')->notNull();
             $table->foreignId('customer_id')->nullable()->constrained('customers');
             $table->foreignId('supplier_id')->nullable()->constrained('suppliers');
             $table->foreignId('friend_id')->nullable()->constrained('friends');

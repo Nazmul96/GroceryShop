@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FriendRequest extends FormRequest
+class SellTransactionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class FriendRequest extends FormRequest
     public function rules()
     {
         return [
-            'amount' => 'required',
+            'customer_id' => 'required|exists:customers,id',
+            'amount' => 'required|numeric',
             'transaction_details' => 'required',
         ];
     }
