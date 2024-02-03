@@ -13,19 +13,16 @@ class ReportController extends Controller
     {
         $date_details = ControllerHelper::getDateDetails($request);
 
-        dd($date_details);
         $totalReportData = Transaction::whereBetween('transaction_date', [$date_details['from_date'], $date_details['to_date']])
-        ->where('type', 'income')
-        ->orwhere('type', 'expense')
-        ->get();
+                            ->whereIn('type',['income','expense'])
+                            ->get();
 
-        dd($totalReportData);
-        $totalIncome   = $totalReportData->where('type', 'income')->sum('amount');
+        $totalIncome    = $totalReportData->where('type', 'income')->sum('amount');
 
-        $totalExpenses = $totalReportData->where('type', 'expense')->sum('amount');
+        $totalExpenses  = $totalReportData->where('type', 'expense')->sum('amount');
     
    
-        $profitLoss = $totalIncome - $totalExpenses;
+        $profitLoss     = $totalIncome - $totalExpenses;
 
         return view('report.index',compact('date_details','totalIncome', 'totalExpenses', 'profitLoss','totalReportData'));
     }

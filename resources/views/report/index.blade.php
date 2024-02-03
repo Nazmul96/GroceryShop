@@ -7,30 +7,43 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="col-12">
-                    <div class="message-div"></div>
-                    <form class="form-horizontal form-label-left" method="GET" action="">
-                        <div class="row">
-                            <div class="form-group">
-                                <label>Date range:</label>
-              
-                                <div class="input-group">
-                                  <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                      <i class="far fa-calendar-alt"></i>
-                                    </span>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="message-div"></div>
+                        <form class="form-horizontal form-label-left" method="GET" action="">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Date range:</label>
+                  
+                                    <div class="input-group">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                          <i class="far fa-calendar-alt"></i>
+                                        </span>
+                                      </div>
+                                      <input type="text" class="form-control float-right" id="reservation" name="date_range" value="{{ $date_details['date_range'] }}" >
+                                    </div>
+                                    <!-- /.input group -->
                                   </div>
-                                  <input type="text" class="form-control float-right" id="reservation" name="date_range" value="{{ $date_details['date_range'] }}" >
+                                <div class="col-md-1">
+                                    <label class="fw-bold col-md-12 col-sm-0 col-xs-0">&nbsp;</label>
+                                    <button type="submit" class="btn bg-dark">Search</button>
                                 </div>
-                                <!-- /.input group -->
-                              </div>
-                            <div class="col-md-1">
-                                <label class="fw-bold col-md-12 col-sm-0 col-xs-0">&nbsp;</label>
-                                <button type="submit" class="btn bg-dark">Search</button>
                             </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <h4>Profit/Loss</h4>
+                        <h6>Income: {{$totalIncome}}</h6>
+                        <h6>Expense: {{$totalExpenses}}</h6>
+                        
+                        @if($profitLoss > 0)
+                            <h6 class="text-success">Profit: {{$profitLoss}}</h6>
+                        @elseif($profitLoss < 0)
+                            <h6 class="text-danger">Loss: {{abs($profitLoss)}}</h6>
+                        @endif 
+                    </div>  
+                </div>  
                 <table class="table table-bordered table-striped">
                       <thead class="bg-dark text-white">
                             <th>Date</th>
