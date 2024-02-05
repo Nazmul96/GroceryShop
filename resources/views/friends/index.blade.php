@@ -13,6 +13,8 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Loan</th>
+                    <th>Repaid</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -22,6 +24,8 @@
                         <td>{{ $friend->id }}</td>
                         <td>{{ $friend->name }}</td>
                         <td>{{ $friend->email }}</td>
+                        <td>{{ $friend->total_loan }}</td>
+                        <td>{{ $friend->repaid_amount }}</td>
                         <td>
                             <a type="button" class="btn btn-sm btn-primary lend_money" data-id="{{$friend->id}}" data-toggle="modal" data-target="#lendModal">Lend Money</a>
                             <a type="button" class="btn btn-sm btn-success receive_repayment" data-id="{{$friend->id}}" data-toggle="modal" data-target="#lendModal">Receive Repayment</a>

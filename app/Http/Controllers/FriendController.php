@@ -43,6 +43,8 @@ class FriendController extends Controller
         
         $transaction = new Transaction([
             'type' => TransactionConstant::TYPE_REPAID,
+            'transaction_date'    => now()->format('Y-m-d'),
+            'transaction_details' => $request->validated('transaction_details'),
             'amount' => $amount,
         ]);
 
